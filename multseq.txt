@@ -1,0 +1,308 @@
+%            __  __ _   _ _ _                  
+%           |  \/  | | | | | |_ ___  ___  __ _ 
+%           | |\/| | | | | | __/ __|/ _ \/ _` |
+%           | |  | | |_| | | |_\__ \  __/ (_| |
+%           |_|  |_|\___/|_|\__|___/\___|\__, |
+%                                           |_|
+%
+% A generic prover for propositional many-valued sequent calculi
+%
+%                 Version 0.4 (16/09/1998)
+%                 Angel Gil & Gernot Salzer
+
+
+
+1. Installation & Configuration
+===============================
+
+MUltseq 0.4 consists of the following files:
+
+ - msconf.pl    OS- and Prolog-specific settings
+ - mskernel.pl  kernel of MUltseq: proof construction and transformations
+ - mslgcin.pl   routines for reading logic specification
+ - msoption.pl  processing of options
+ - mstex.pl     output routines (TeX)
+ - msutil.pl    auxiliary predicates
+ - multseq.pl   main file; loads all other parts of MUltseq listed above
+
+ - multseq.txt  this file; documentation for MUltseq
+
+ - mspost.tex   postamble of TeX documents created by MUltseq
+ - mspre.tex    preamble  of TeX documents created by MUltseq
+ - proof.sty    style file for typesetting derivations (by Makoto Tatsuta)
+
+ - luka         sample input specifying the three-valued Lukasiewicz logic
+                
+Put all listed file in one and the same directory, say "multseq".
+Check file "msconf.pl" and edit it to fit your operating system
+(DOS/Windows, Unix, or Mac).
+
+
+
+2. How to use MUltseq
+=====================
+
+2.1.  For the impatient
+=======================
+
+Start Prolog and load MUltseq:
+   ?- [multseq].
+Load the sample logic included in the distribution:
+   ?- load_logic(luka).
+Generate a TeX file containing derivations for one of the
+sample sequents in "luka":
+   ?- test(<s>).
+where <s> is one of s1, s2, s3, s4, or s5.
+The result is written to the file "out.tex".
+
+
+2.2.  Interface
+===============
+
+2.2.1.  Main predicates
+-----------------------
+
+* prove(Sequent, ProofTree).
+  <ProofTree> is a derivation of <Sequent> from axioms and hypotheses.
+
+* collect_hyps(ProofTree, ListOfHypotheses).
+  <ListOfHypotheses> is the minimized list of hypotheses used in
+  <ProofTree>.
+
+* proof_skeleton(ProofTree, Skeleton, SequentTable)
+  <Skeleton> is the skeleton of <ProofTree>: all sequents are
+  replaced by unique numbers. The correspondence between numbers and
+  sequents is given by <SequentTable> which is a list of Number:Sequent
+  pairs.
+
+2.2.2.  Predicates for setting and listing options
+--------------------------------------------------
+
+* reset_options.
+  Resets all options to their defaults.
+
+* set_option(Option).
+  Sets option <Option>. See below for the list of options.
+
+* list_options.
+  Lists all active as well as all available options.
+
+Currently the following options are implemented:
+
+* "strategy(S)" 
+  Defines the strategy for selecting an applicable rule.
+  The following strategies <S> exist:
+  - "leftright" (default)
+    The sequent is scanned from left to right, and the first
+    non-variable expression found is decomposed using the first
+    rule (searching top-down) which is applicable to the expression.
+  - "topdown"
+    The rules are scanned top-down, and the first rule applicable
+    to any expression in the sequent is chosen; if the rule applies
+    to several expressions, the first one from the left is taken.
+  - "ordering(ListOfRuleNames)"
+    Refinement of the strategy "topdown". The rules are tried in 
+    the order given by <ListOfRuleNames>.
+    The same effect could be reached (less elegantly) by reordering
+    the rules in the input file and using "top_down".
+    A good heuristic might be to order the rules according to
+    their branching degree, small branching degrees first.
+    This will result in narrow proof trees and less duplication.
+    Within the same branching degree one might prefer rules with
+    more formulas per sequent (with the intuition behind that this
+    will lead faster to an axiom); or one might prefer rules with a
+    small number of formulas per sequent (to avoid duplication).
+  - "interactive"
+    MUltseq collects all rules applicable to any part of the sequent.
+    If there is only one possibilty to apply a rule, it is applied.
+    Otherwise the rules are listed on standard output and the user
+    is given the choice.
+
+* "tex_rulenames(OnOff)"  (default: <OnOff>="off")
+  If <OnOff>="on" then each step in a TeX-derivation is labeled by
+  the applied rule. Otherwise, if <OnOff>="off", no labels are
+  added.
+
+* "tex_sequents(Style)"   (default: <Style>="signed")
+  <Style>="signed"  prints sequents as signed formulas, where as with
+  <Style>="multidimensional"  sequents are represented as n-tuples,
+  where the truth value assigned to a formula is given implicit by
+  the position of the formula within the sequent.
+
+* "tex_proofstyle(Style)" (default: <Style>="verbose")
+  <Style>="verbose" means that axioms and hypotheses are marked by the
+  phrases "axiom for A" and "hypothesis".
+  <Style>="compact" results in the phrases "ax(A)" and "hyp".
+  <Style>="bare" suppresses the phrases altogether.
+
+  
+******************* Currently still under construction ****************
+******************* Below are comments which were part ****************
+******************* of former versions of MUltseq  and ****************
+******************* which will be integrated in the    ****************
+******************* documentation.                     ****************
+
+
+  When writing derivations in TeX format, the 
+
+%%%%%  1. INTERFACE SPECIFICATION
+%
+% This section describes how to load and use the prover.
+% The data structures are described at the beginning of section III.
+% However, looking at the test sequents in file "luka" should
+% suffice.
+%
+% After starting Prolog, load the prover:
+%    ?- [multseq].
+%
+% Next, the specification of a logic has to be loaded, which contains the
+% sequent rules (will be automatically generated by MUltlog
+% in the future).
+% The file "luka" contains a complete specification of the
+% 3-valued Lukasiewicz logic. It is loaded by
+%    ?- load_logic(luka).
+% Note that the input file looks like a Prolog source. However,
+% consulting the specification instead of using "load_logic"
+% does not work, since the latter predicate performs some
+% transformations and initializations.
+%
+% The specification of a logic can also provide sample sequents
+% via the predicate ts/2. E.g., "luka" contains the test sequents
+%    ts(s1, [(a=>b)^p, (a v c)^t]).
+%    ts(s2, [(a=>(b=>a))^t]).
+%    ts(s3, [(a&b)^f, a^p, (a v b)^t]).
+%    ts(s4, [(a&b)^f, (a&b)^p, b^t]).
+%
+% To construct a proof for the second sequent above and to print it,
+% one could use the goal
+%    ?- ts(s2, S), prove(S, T), print_proof(T).
+%
+% This generates the following output on the screen (without the
+% indentations and line breaks used below):
+%    S = [(a=>(b=>a))^t]
+%    T = ra(it, [(a=>(b=>a))^t],
+%          [ra(it, [a^f, a^p, (b=>a)^t],
+%             [ra(ax(a), [a^f, a^p, a^t, b^f, b^p], []),
+%              ra(ax(a), [a^f, a^p, a^t, b^f], [])
+%             ]),
+%           ra(ip, [a^f, (b=>a)^p, (b=>a)^t],
+%             [ra(it, [a^f, a^p, b^p, (b=>a)^t],
+%                [ra(ax(a), [a^f, a^p, a^t, b^f, b^p], []),
+%                 ra(ax(a), [a^f, a^p, a^t, b^f, b^p], [])
+%                ]),
+%              ra(it, [a^f, b^t, (b=>a)^t],
+%                [ra(ax(b), [a^f, a^t, b^f, b^p, b^t], []),
+%                 ra(ax(a), [a^f, a^p, a^t, b^f, b^t], [])
+%                ])
+%             ])
+%          ])
+% S is the sequent to be proved, T is its proof.
+% As a side effect, "print_proof(T)" generates the file
+% "out.tex", which contains the proof in LaTeX format.
+% Note that you need the style "proof.sty" by *Makoto Tatsuta*
+% (not the one by Paul Taylor!!!) to tex the file.
+%
+% After entering the goal above, Prolog is waiting for input.
+% If you press ";" (semicolon), the next proof of the same sequent
+% will be produced. Note that for each proof the output file
+% is written anew: only the last proof will remain in "out.tex".
+%
+% Instead of "print_proof(T)" one could use "print_proof(F, T)"
+% to direct the LaTeX output to a specific file named F.
+% "print_proof(T)" is equivalent to "print_proof('out.tex', T)".
+
+
+
+%%%%%  3. THE PROVER
+%
+% Data structures:
+% - Sequent: list of signed formulas
+% - Signed formula: F^S
+%      where F is a many-valued formula (any term)
+%      and S is a truth value
+% - Proof tree: ra(Name, Conclusion, Proofs)
+%      ra ... "rule application"
+%      Rule <Name> is applied to the conclusions of <Proofs>,
+%      giving <Conclusion>
+%      <Name> ......... arbitrary
+%      <Conclusion> ... sequent
+%      <Proofs> ..... list of proof trees
+
+% prove(Sequent, Prooftree).
+% Constructs a <Prooftree> for <Sequent>.
+
+% select_rule(S, Sl, Sr, Ps, R).
+% Select a formula F from sequent <S> and choose an applicable rule.
+% <Sl> are the signed formulas to the left of F, <Sr> are those to
+% the right of F, <Ps> are the premises of the chosen rule, and
+% <R> is its name.
+
+
+% appseqs(Sl, Sr, S0, S).
+% <Sl> is added to the left of <S0> and <Sr> to the right,
+% the result being <S>: S = [Sl, S0, Sr].
+%
+% split(S, Sl, F, Sr).
+% Selects an element <F> from <S>, and instantiates <Sl> (<Sr>)
+% with the elements to the left (right) of <F>:   S = [Sl, [F], Sr]
+%
+% contains_axiom(Sequent, A).
+% Checks whether <Sequent> contains axiom "<A>|...|<A>".
+% Depends on the fact that truth values and sequents are kept sorted.
+%
+% collect_hyps(ProofTree, MinHypotheses)
+% Gathers all hypotheses occurring in <ProofTree>
+% and returns a minimized list of hypotheses in <MinHypotheses>.
+%%%%%  4. INPUT OF LOGIC
+%
+% The input file may contain the following elements
+% (see file "luka" for examples).
+%
+% o truth values:
+%      truth_values(TVs).
+%   where TVs is a list of atoms.
+%
+% o operator declarations:
+%      op(Priority, Associativity, Name).
+%   where the parameters of op/3 are defined as in Prolog.
+%
+% o sequent rules:
+%      rule(Conclusion, Premises, Name).
+%
+% o sample sequents for testing:
+%      ts(Name, Sequent).
+%
+% o directives for beautifying the TeX output
+%
+%   - tex_tv(TV, String).
+%     The truth value TV is typeset using String (in math mode).
+%     If no such directive exists for a truth value, TV is
+%     converted to a string using name/2. This may lead to an error
+%     if TV is no valid argument for name/2.
+%
+%   - tex_rn(RN, String).
+%     The same for rule names.
+%
+%   - tex_opname(ON, String).
+%     The same for names of connectives and variables.
+%     The default, however, is different: ON is first converted
+%     to a string using name/2, and then typeset in the \mathit font.
+%     Note that this directive is overridden by a "tex_op" directive
+%     matching the whole expression, which contains the connective.
+%     (See below for "tex_op".)
+%
+%   - tex_op(Expr, List).
+%     Expr is a term built from a connective and Prolog variables
+%     as arguments. These variables can be reused in List to typeset
+%     a connective in prefix/infix/postfix notation.
+%     To obtain a backslash, use "bslash".
+%
+%     Example:
+%        tex_op((A v B), ["(", A, bslash, "lor ", B, ")"]).
+%     An expression F1 v F2, where F1 and F2 are formulas, will be
+%     typeset as  "(<string for F1>\lor <string for F2>)".
+%
+%     If there is no "tex_op" directive for a connective, the
+%     expression will be typeset in functor notation, using a
+%     tex_op directive for the connective if available.
+%

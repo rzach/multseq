@@ -1,0 +1,105 @@
+% luka - specification of a sequent calculus for 3-valued Lukasiewicz logic
+% Version 0.5
+
+%option(tex_rulenames(on)).
+%option(tex_sequents(multidimensional)).
+%option(strategy(rule_ordering([nf,np,nt,af,ot,it,if,ip,at,of,ap,op]))).
+
+
+truth_values([f,p,t]).
+designated_truth_values([t]).
+tex_tv(f,["f"]).
+tex_tv(p,["p"]).
+tex_tv(t,["t"]).
+
+% Implication
+%
+op(800, xfx, =>).
+tex_op((A=>B), ["(", A, bslash, "supset ", B, ")"]).
+rule((A=>B)^f, [[A^t],[B^f]], if).
+rule((A=>B)^p, [[A^p,B^p],[A^t,B^f]], ip).
+rule((A=>B)^t, [[A^f,A^p,B^t],[A^f,B^p,B^t]], it).
+tex_rn(if, ["{", bslash, "supset}", bslash, "colon f"]).
+tex_rn(ip, ["{", bslash, "supset}", bslash, "colon p"]).
+tex_rn(it, ["{", bslash, "supset}", bslash, "colon t"]).
+
+% Conjunction
+%
+op(600, yfx, &).
+tex_op((A&B), ["(", A, bslash, "land ", B, ")"]).
+rule((A&B)^f, [[A^f,B^f]], af).
+rule((A&B)^p, [[A^p,B^p],[A^p,A^t],[B^p,B^t]], ap).
+rule((A&B)^t, [[A^t],[B^t]], at).
+tex_rn(af, ["{", bslash, "land}", bslash, "colon f"]).
+tex_rn(ap, ["{", bslash, "land}", bslash, "colon p"]).
+tex_rn(at, ["{", bslash, "land}", bslash, "colon t"]).
+
+% Disjunction
+%
+op(700, yfx, v).
+tex_op((A v B), ["(", A, bslash, "lor ", B, ")"]).
+rule((A v B)^f, [[A^f],[B^f]], of).
+rule((A v B)^p, [[A^p,B^p],[A^p,A^f],[B^p,B^f]], op).
+rule((A v B)^t, [[A^t,B^t]], ot).
+tex_rn(of, ["{", bslash, "lor}", bslash, "colon f"]).
+tex_rn(op, ["{", bslash, "lor}", bslash, "colon p"]).
+tex_rn(ot, ["{", bslash, "lor}", bslash, "colon t"]).
+
+% Negation
+%
+%op(500, fx, -).
+tex_op((-A), [bslash, "neg ", A]).
+rule((-A)^f, [[A^t]], nf).
+rule((-A)^p, [[A^p]], np).
+rule((-A)^t, [[A^f]], nt).
+tex_rn(nf, ["{", bslash, "neg}", bslash, "colon f"]).
+tex_rn(np, ["{", bslash, "neg}", bslash, "colon p"]).
+tex_rn(nt, ["{", bslash, "neg}", bslash, "colon t"]).
+
+% Tests for derivability of sequents
+%
+ts(s1, [(a=>b)^p, (a v c)^t]).
+ts(s2, [(a=>(b=>a))^t]).
+ts(s3, [(a&b)^f, a^p, (a v b)^t]).
+ts(s4, [(a&b)^f, (a&b)^p, b^t]).
+ts(s5, [(((a =>b) => b) => ((b => a) => a))^t]).
+ts(s6, [((a=>b)=>b)^t]).
+
+% Tests for consequence relation on sequents
+%
+tcs(cs1, [[a^f,a^p,b^t],[a^f,b^p,b^t]],[(a=>b)^t]).
+tcs(cs2, [[a^p,a^f,b^t],[a^f,b^p,b^t]],[(a=>b)^t]).
+tcs(cs3, [[a^f,a^p,b^t],[a^f,b^p,b^t]],[(a=>b)^p]).
+tcs(cs4, [[a^f,a^p,b^t],[a^f,b^p,b^t]],[(a=>b)^f]).
+tcs(cs5, [[(a & b)^t]],[a^t]).
+tcs(cs6, [[(a v b)^t]],[a^t]).
+
+% Tests for validity of formulas
+%
+tf(f1, (a => (b => a)), [t]).
+tf(f2, (a => (b => a)), [p]).
+tf(f3, ((a v -a) => (a & -a)), [f,t]).
+
+% Tests for consequence relation on formulas
+%
+tcf(cf1, [x=>y, x], y ,[t]).
+tcf(cf2, [x=>y, x], y, [p]).
+tcf(cf3, [x=>y, x], y, [p,t]).
+tcf(cf4, [x], x v y, [t]).
+
+% Tests for validity of equations
+%
+te(e1, (-(-a)=a)).
+
+% Tests for validity of quasi-equations
+%
+tqe(qe1, [a=b,b=c], a=c).
+tqe(qe2, [a=b,c=d], a=d).
+
+tex_opname(a, ["A"]).
+tex_opname(b, ["B"]).
+tex_opname(c, ["C"]).
+tex_opname(d, ["D"]).
+tex_opname(x, ["X"]).
+tex_opname(y, ["Y"]).
+tex_opname(z, ["Z"]).
