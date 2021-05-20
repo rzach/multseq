@@ -11,6 +11,8 @@
 %                 Version 0.6 (13/09/2002)
 %                 Angel Gil & Gernot Salzer
 
+:- set_prolog_flag(double_quotes, codes).
+
 :- [msconf].    % OS- and Prolog-specific settings; currently only end-of-line
 :- [msutil].    % auxiliary predicates
 :- [mscalcul].  % proof construction, proof transformations, ...

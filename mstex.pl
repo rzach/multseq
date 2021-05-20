@@ -354,7 +354,7 @@ add_tex_mvf([], []).
 add_tex_mvf([F|Fs0], [tex_mvf(F)|Fs]) :-
 	add_tex_mvf(Fs0, Fs).
 
-bslash --> [0'\].
+bslash --> "\\".
 
 true -->
 	[].
