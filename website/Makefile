@@ -23,9 +23,12 @@ manual: ../doc/multseq.pdf ../doc/multseq.html
 	pdflatex -output-directory $(@D) $< 
 	pdflatex -output-directory $(@D) $< 
 
-$(EXDIR)/%.pdf: $(EXDIR)/%.tex $(EXDIR)/%.pl ../multseq/*.pl
+$(EXDIR)/%.tex: $(EXDIR)/%.pl ../multseq/*.pl
 	cd $(EXDIR); \
-	prolog -s "$(notdir $*)" -g "halt."; \
+	prolog -s "$(notdir $*)" -g "halt."
+
+$(EXDIR)/%.pdf: $(EXDIR)/%.tex
+	cd $(EXDIR); \
 	pdflatex -interaction=nonstopmode $* || true
 
 index.html: index.md website.md ../doc/multseq.bib .FORCE
