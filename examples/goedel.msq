@@ -1,0 +1,43 @@
+% goedel.msq - MSeq specification of logic 'G\"odel'
+truth_values([f,*,t]).
+designated_truth_values([t]).
+
+operator(true, 0, "\\top").
+rule(true^*, [[]], true_*).
+rule(true^f, [[]], true_f).
+rule(true^t, [], true_t).
+tex_op(true, ["\\top"]).
+
+operator(false, 0, "\\bot").
+rule(false^*, [[]], false_*).
+rule(false^f, [], false_f).
+rule(false^t, [[]], false_t).
+tex_op(false, ["\\bot"]).
+
+operator(neg, 1, "\\lnot").
+rule(neg(A1)^*, [[]], neg_*).
+rule(neg(A1)^f, [[A1^*, A1^t]], neg_f).
+rule(neg(A1)^t, [[A1^f]], neg_t).
+op(500,fx,neg).
+tex_op(neg(A), ["\\lnot", " ", A]).
+
+operator(imp, 2, "\\supset").
+rule(imp(A1 , A2)^*, [[A2^*], [A1^t]], imp_*).
+rule(imp(A1 , A2)^f, [[A2^f], [A1^*, A1^t]], imp_f).
+rule(imp(A1 , A2)^t, [[A1^f, A2^*, A2^t], [A1^f, A1^*, A2^t]], imp_t).
+op(700,xfx,imp).
+tex_op(imp(A, B), ["(", A, "\\supset", " ", B, ")"]).
+
+operator(and, 2, "\\land").
+rule(and(A1 , A2)^*, [[A2^*, A2^t], [A1^*, A2^*], [A1^*, A1^t]], and_*).
+rule(and(A1 , A2)^f, [[A1^f, A2^f]], and_f).
+rule(and(A1 , A2)^t, [[A2^t], [A1^t]], and_t).
+op(700,xfx,and).
+tex_op(and(A, B), ["(", A, "\\land", " ", B, ")"]).
+
+operator(or, 2, "\\lor").
+rule(or(A1 , A2)^*, [[A2^f, A2^*], [A1^*, A2^*], [A1^f, A1^*]], or_*).
+rule(or(A1 , A2)^f, [[A2^f], [A1^f]], or_f).
+rule(or(A1 , A2)^t, [[A1^t, A2^t]], or_t).
+op(700,xfx,or).
+tex_op(or(A, B), ["(", A, "\\lor", " ", B, ")"]).

@@ -1,0 +1,66 @@
+% lukasiewicz.msq - MSeq specification of logic '\L ukasiewicz'
+truth_values([f,u,t]).
+designated_truth_values([t]).
+tex_tv(f,["\\mathbf{0}"]).
+tex_tv(u,["\\mathbf{\\sfrac{1}{2}}"]).
+tex_tv(t,["\\mathbf{1}"]).
+
+operator(neg, 1, "\\lnot").
+rule(neg(A1)^f, [[A1^t]], neg_f).
+tex_rn(neg_f, ["{", "\\lnot", "}_{", "\\mathbf{0}", "}"]).
+rule(neg(A1)^t, [[A1^f]], neg_t).
+tex_rn(neg_t, ["{", "\\lnot", "}_{", "\\mathbf{1}", "}"]).
+rule(neg(A1)^u, [[A1^u]], neg_u).
+tex_rn(neg_u, ["{", "\\lnot", "}_{", "\\mathbf{\\sfrac{1}{2}}", "}"]).
+op(500,fx,neg).
+tex_op(neg(A), ["\\lnot", " ", A]).
+
+operator(imp, 2, "\\to").
+rule(imp(A1 , A2)^f, [[A2^f], [A1^t]], imp_f).
+tex_rn(imp_f, ["{", "\\to", "}_{", "\\mathbf{0}", "}"]).
+rule(imp(A1 , A2)^t, [[A1^f, A2^u, A2^t], [A1^f, A1^u, A2^t]], imp_t).
+tex_rn(imp_t, ["{", "\\to", "}_{", "\\mathbf{1}", "}"]).
+rule(imp(A1 , A2)^u, [[A1^u, A2^u], [A1^t, A2^f]], imp_u).
+tex_rn(imp_u, ["{", "\\to", "}_{", "\\mathbf{\\sfrac{1}{2}}", "}"]).
+op(700,xfx,imp).
+tex_op(imp(A, B), ["(", A, "\\to", " ", B, ")"]).
+
+operator(sand, 2, "\\otimes").
+rule(sand(A1 , A2)^f, [[A1^f, A2^f, A2^u], [A1^f, A1^u, A2^f]], sand_f).
+tex_rn(sand_f, ["{", "\\otimes", "}_{", "\\mathbf{0}", "}"]).
+rule(sand(A1 , A2)^t, [[A2^t], [A1^t]], sand_t).
+tex_rn(sand_t, ["{", "\\otimes", "}_{", "\\mathbf{1}", "}"]).
+rule(sand(A1 , A2)^u, [[A1^u, A2^u], [A1^t, A2^t]], sand_u).
+tex_rn(sand_u, ["{", "\\otimes", "}_{", "\\mathbf{\\sfrac{1}{2}}", "}"]).
+op(700,xfx,sand).
+tex_op(sand(A, B), ["(", A, "\\otimes", " ", B, ")"]).
+
+operator(sor, 2, "\\oplus").
+rule(sor(A1 , A2)^f, [[A2^f], [A1^f]], sor_f).
+tex_rn(sor_f, ["{", "\\oplus", "}_{", "\\mathbf{0}", "}"]).
+rule(sor(A1 , A2)^t, [[A1^t, A2^u, A2^t], [A1^u, A1^t, A2^t]], sor_t).
+tex_rn(sor_t, ["{", "\\oplus", "}_{", "\\mathbf{1}", "}"]).
+rule(sor(A1 , A2)^u, [[A1^f, A2^f], [A1^u, A2^u]], sor_u).
+tex_rn(sor_u, ["{", "\\oplus", "}_{", "\\mathbf{\\sfrac{1}{2}}", "}"]).
+op(700,xfx,sor).
+tex_op(sor(A, B), ["(", A, "\\oplus", " ", B, ")"]).
+
+operator(and, 2, "\\land").
+rule(and(A1 , A2)^f, [[A1^f, A2^f]], and_f).
+tex_rn(and_f, ["{", "\\land", "}_{", "\\mathbf{0}", "}"]).
+rule(and(A1 , A2)^t, [[A2^t], [A1^t]], and_t).
+tex_rn(and_t, ["{", "\\land", "}_{", "\\mathbf{1}", "}"]).
+rule(and(A1 , A2)^u, [[A2^u, A2^t], [A1^u, A2^u], [A1^u, A1^t]], and_u).
+tex_rn(and_u, ["{", "\\land", "}_{", "\\mathbf{\\sfrac{1}{2}}", "}"]).
+op(700,xfx,and).
+tex_op(and(A, B), ["(", A, "\\land", " ", B, ")"]).
+
+operator(or, 2, "\\lor").
+rule(or(A1 , A2)^f, [[A2^f], [A1^f]], or_f).
+tex_rn(or_f, ["{", "\\lor", "}_{", "\\mathbf{0}", "}"]).
+rule(or(A1 , A2)^t, [[A1^t, A2^t]], or_t).
+tex_rn(or_t, ["{", "\\lor", "}_{", "\\mathbf{1}", "}"]).
+rule(or(A1 , A2)^u, [[A2^f, A2^u], [A1^u, A2^u], [A1^f, A1^u]], or_u).
+tex_rn(or_u, ["{", "\\lor", "}_{", "\\mathbf{\\sfrac{1}{2}}", "}"]).
+op(700,xfx,or).
+tex_op(or(A, B), ["(", A, "\\lor", " ", B, ")"]).

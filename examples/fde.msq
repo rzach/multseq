@@ -1,0 +1,175 @@
+% fde.msq - MSeq specification of logic 'First Degree Entailment'
+truth_values([t,b,n,f]).
+designated_truth_values([b,t]).
+tex_tv(t,["\\mathbf{t}"]).
+tex_tv(b,["\\mathbf{b}"]).
+tex_tv(n,["\\mathbf{n}"]).
+tex_tv(f,["\\mathbf{f}"]).
+
+operator(neg, 1, "\\mathord{\\sim}").
+rule(neg(A1)^b, [[A1^b]], neg_b).
+tex_rn(neg_b, ["{", "\\mathord{\\sim}", "}_{", "\\mathbf{b}", "}"]).
+rule(neg(A1)^f, [[A1^t]], neg_f).
+tex_rn(neg_f, ["{", "\\mathord{\\sim}", "}_{", "\\mathbf{f}", "}"]).
+rule(neg(A1)^n, [[A1^n]], neg_n).
+tex_rn(neg_n, ["{", "\\mathord{\\sim}", "}_{", "\\mathbf{n}", "}"]).
+rule(neg(A1)^t, [[A1^f]], neg_t).
+tex_rn(neg_t, ["{", "\\mathord{\\sim}", "}_{", "\\mathbf{t}", "}"]).
+op(500,fx,neg).
+tex_op(neg(A), ["\\mathord{\\sim}", " ", A]).
+
+operator(bneg, 1, "\\lnot_b").
+rule(bneg(A1)^b, [[A1^n]], bneg_b).
+tex_rn(bneg_b, ["{", "\\lnot_b", "}_{", "\\mathbf{b}", "}"]).
+rule(bneg(A1)^f, [[A1^t]], bneg_f).
+tex_rn(bneg_f, ["{", "\\lnot_b", "}_{", "\\mathbf{f}", "}"]).
+rule(bneg(A1)^n, [[A1^b]], bneg_n).
+tex_rn(bneg_n, ["{", "\\lnot_b", "}_{", "\\mathbf{n}", "}"]).
+rule(bneg(A1)^t, [[A1^f]], bneg_t).
+tex_rn(bneg_t, ["{", "\\lnot_b", "}_{", "\\mathbf{t}", "}"]).
+op(500,fx,bneg).
+tex_op(bneg(A), ["\\lnot_b", " ", A]).
+
+operator(and, 2, "\\land").
+rule(and(A1 , A2)^b, [[A2^t, A2^b], [A1^b, A2^b], [A1^t, A1^b]], and_b).
+tex_rn(and_b, ["{", "\\land", "}_{", "\\mathbf{b}", "}"]).
+rule(and(A1 , A2)^f, [[A1^b, A1^f, A2^b, A2^f], [A1^n, A1^f, A2^n, A2^f]], and_f).
+tex_rn(and_f, ["{", "\\land", "}_{", "\\mathbf{f}", "}"]).
+rule(and(A1 , A2)^n, [[A2^t, A2^n], [A1^n, A2^n], [A1^t, A1^n]], and_n).
+tex_rn(and_n, ["{", "\\land", "}_{", "\\mathbf{n}", "}"]).
+rule(and(A1 , A2)^t, [[A2^t], [A1^t]], and_t).
+tex_rn(and_t, ["{", "\\land", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,and).
+tex_op(and(A, B), ["(", A, "\\land", " ", B, ")"]).
+
+operator(or, 2, "\\lor").
+rule(or(A1 , A2)^b, [[A2^b, A2^f], [A1^b, A2^b], [A1^b, A1^f]], or_b).
+tex_rn(or_b, ["{", "\\lor", "}_{", "\\mathbf{b}", "}"]).
+rule(or(A1 , A2)^f, [[A2^f], [A1^f]], or_f).
+tex_rn(or_f, ["{", "\\lor", "}_{", "\\mathbf{f}", "}"]).
+rule(or(A1 , A2)^n, [[A2^n, A2^f], [A1^n, A2^n], [A1^n, A1^f]], or_n).
+tex_rn(or_n, ["{", "\\lor", "}_{", "\\mathbf{n}", "}"]).
+rule(or(A1 , A2)^t, [[A1^t, A1^b, A2^t, A2^b], [A1^t, A1^n, A2^t, A2^n]], or_t).
+tex_rn(or_t, ["{", "\\lor", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,or).
+tex_op(or(A, B), ["(", A, "\\lor", " ", B, ")"]).
+
+operator(impe, 2, "\\to_e").
+rule(impe(A1 , A2)^b, [[A2^b], [A1^t, A1^b]], impe_b).
+tex_rn(impe_b, ["{", "\\to_e", "}_{", "\\mathbf{b}", "}"]).
+rule(impe(A1 , A2)^f, [[A2^f], [A1^t, A1^b]], impe_f).
+tex_rn(impe_f, ["{", "\\to_e", "}_{", "\\mathbf{f}", "}"]).
+rule(impe(A1 , A2)^n, [[A2^n], [A1^t, A1^b]], impe_n).
+tex_rn(impe_n, ["{", "\\to_e", "}_{", "\\mathbf{n}", "}"]).
+rule(impe(A1 , A2)^t, [[A1^n, A1^f, A2^t]], impe_t).
+tex_rn(impe_t, ["{", "\\to_e", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,impe).
+tex_op(impe(A, B), ["(", A, "\\to_e", " ", B, ")"]).
+
+operator(impb, 2, "\\to_b").
+rule(impb(A1 , A2)^b, [[A2^b, A2^f], [A1^n, A2^b], [A1^t, A1^n]], impb_b).
+tex_rn(impb_b, ["{", "\\to_b", "}_{", "\\mathbf{b}", "}"]).
+rule(impb(A1 , A2)^f, [[A2^f], [A1^t]], impb_f).
+tex_rn(impb_f, ["{", "\\to_b", "}_{", "\\mathbf{f}", "}"]).
+rule(impb(A1 , A2)^n, [[A2^n, A2^f], [A1^b, A2^n], [A1^t, A1^b]], impb_n).
+tex_rn(impb_n, ["{", "\\to_b", "}_{", "\\mathbf{n}", "}"]).
+rule(impb(A1 , A2)^t, [[A1^b, A1^f, A2^t, A2^n], [A1^n, A1^f, A2^t, A2^b]], impb_t).
+tex_rn(impb_t, ["{", "\\to_b", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,impb).
+tex_op(impb(A, B), ["(", A, "\\to_b", " ", B, ")"]).
+
+operator(impl, 2, "\\to_l").
+rule(impl(A1 , A2)^b, [[A2^b], [A1^b]], impl_b).
+tex_rn(impl_b, ["{", "\\to_l", "}_{", "\\mathbf{b}", "}"]).
+rule(impl(A1 , A2)^f, [[A2^b, A2^f], [A1^t, A2^f], [A1^t, A1^b]], impl_f).
+tex_rn(impl_f, ["{", "\\to_l", "}_{", "\\mathbf{f}", "}"]).
+rule(impl(A1 , A2)^n, [[A1^t, A1^b, A2^b, A2^f], [A1^n, A2^n]], impl_n).
+tex_rn(impl_n, ["{", "\\to_l", "}_{", "\\mathbf{n}", "}"]).
+rule(impl(A1 , A2)^t, [[A1^f, A2^t, A2^n], [A1^n, A1^f, A2^t]], impl_t).
+tex_rn(impl_t, ["{", "\\to_l", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,impl).
+tex_op(impl(A, B), ["(", A, "\\to_l", " ", B, ")"]).
+
+operator(confl, 1, "-").
+rule(confl(A1)^b, [[A1^n]], confl_b).
+tex_rn(confl_b, ["{", "-", "}_{", "\\mathbf{b}", "}"]).
+rule(confl(A1)^f, [[A1^f]], confl_f).
+tex_rn(confl_f, ["{", "-", "}_{", "\\mathbf{f}", "}"]).
+rule(confl(A1)^n, [[A1^b]], confl_n).
+tex_rn(confl_n, ["{", "-", "}_{", "\\mathbf{n}", "}"]).
+rule(confl(A1)^t, [[A1^t]], confl_t).
+tex_rn(confl_t, ["{", "-", "}_{", "\\mathbf{t}", "}"]).
+op(500,fx,confl).
+tex_op(confl(A), ["-", " ", A]).
+
+operator(times, 2, "\\otimes").
+rule(times(A1 , A2)^b, [[A2^b], [A1^b]], times_b).
+tex_rn(times_b, ["{", "\\otimes", "}_{", "\\mathbf{b}", "}"]).
+rule(times(A1 , A2)^f, [[A2^b, A2^f], [A1^f, A2^f], [A1^b, A1^f]], times_f).
+tex_rn(times_f, ["{", "\\otimes", "}_{", "\\mathbf{f}", "}"]).
+rule(times(A1 , A2)^n, [[A1^t, A1^n, A2^t, A2^n], [A1^n, A1^f, A2^n, A2^f]], times_n).
+tex_rn(times_n, ["{", "\\otimes", "}_{", "\\mathbf{n}", "}"]).
+rule(times(A1 , A2)^t, [[A2^t, A2^b], [A1^t, A2^t], [A1^t, A1^b]], times_t).
+tex_rn(times_t, ["{", "\\otimes", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,times).
+tex_op(times(A, B), ["(", A, "\\otimes", " ", B, ")"]).
+
+operator(plus, 2, "\\oplus").
+rule(plus(A1 , A2)^b, [[A1^t, A1^b, A2^t, A2^b], [A1^b, A1^f, A2^b, A2^f]], plus_b).
+tex_rn(plus_b, ["{", "\\oplus", "}_{", "\\mathbf{b}", "}"]).
+rule(plus(A1 , A2)^f, [[A2^n, A2^f], [A1^f, A2^f], [A1^n, A1^f]], plus_f).
+tex_rn(plus_f, ["{", "\\oplus", "}_{", "\\mathbf{f}", "}"]).
+rule(plus(A1 , A2)^n, [[A2^n], [A1^n]], plus_n).
+tex_rn(plus_n, ["{", "\\oplus", "}_{", "\\mathbf{n}", "}"]).
+rule(plus(A1 , A2)^t, [[A2^t, A2^n], [A1^t, A2^t], [A1^t, A1^n]], plus_t).
+tex_rn(plus_t, ["{", "\\oplus", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,plus).
+tex_op(plus(A, B), ["(", A, "\\oplus", " ", B, ")"]).
+
+operator(ruet, 1, "\\circlearrowleft").
+rule(ruet(A1)^b, [[A1^t]], ruet_b).
+tex_rn(ruet_b, ["{", "\\circlearrowleft", "}_{", "\\mathbf{b}", "}"]).
+rule(ruet(A1)^f, [[A1^b]], ruet_f).
+tex_rn(ruet_f, ["{", "\\circlearrowleft", "}_{", "\\mathbf{f}", "}"]).
+rule(ruet(A1)^n, [[A1^f]], ruet_n).
+tex_rn(ruet_n, ["{", "\\circlearrowleft", "}_{", "\\mathbf{n}", "}"]).
+rule(ruet(A1)^t, [[A1^n]], ruet_t).
+tex_rn(ruet_t, ["{", "\\circlearrowleft", "}_{", "\\mathbf{t}", "}"]).
+op(500,fx,ruet).
+tex_op(ruet(A), ["\\circlearrowleft", " ", A]).
+
+operator(delta, 1, "\\triangle").
+rule(delta(A1)^b, [[]], delta_b).
+tex_rn(delta_b, ["{", "\\triangle", "}_{", "\\mathbf{b}", "}"]).
+rule(delta(A1)^f, [[A1^n, A1^f]], delta_f).
+tex_rn(delta_f, ["{", "\\triangle", "}_{", "\\mathbf{f}", "}"]).
+rule(delta(A1)^n, [[]], delta_n).
+tex_rn(delta_n, ["{", "\\triangle", "}_{", "\\mathbf{n}", "}"]).
+rule(delta(A1)^t, [[A1^t, A1^b]], delta_t).
+tex_rn(delta_t, ["{", "\\triangle", "}_{", "\\mathbf{t}", "}"]).
+op(500,fx,delta).
+tex_op(delta(A), ["\\triangle", " ", A]).
+
+operator(box, 1, "\\Box").
+rule(box(A1)^b, [[]], box_b).
+tex_rn(box_b, ["{", "\\Box", "}_{", "\\mathbf{b}", "}"]).
+rule(box(A1)^f, [[A1^b, A1^n, A1^f]], box_f).
+tex_rn(box_f, ["{", "\\Box", "}_{", "\\mathbf{f}", "}"]).
+rule(box(A1)^n, [[]], box_n).
+tex_rn(box_n, ["{", "\\Box", "}_{", "\\mathbf{n}", "}"]).
+rule(box(A1)^t, [[A1^t]], box_t).
+tex_rn(box_t, ["{", "\\Box", "}_{", "\\mathbf{t}", "}"]).
+op(500,fx,box).
+tex_op(box(A), ["\\Box", " ", A]).
+
+operator(class, 1, "\\circ").
+rule(class(A1)^b, [[]], class_b).
+tex_rn(class_b, ["{", "\\circ", "}_{", "\\mathbf{b}", "}"]).
+rule(class(A1)^f, [[A1^b, A1^n]], class_f).
+tex_rn(class_f, ["{", "\\circ", "}_{", "\\mathbf{f}", "}"]).
+rule(class(A1)^n, [[]], class_n).
+tex_rn(class_n, ["{", "\\circ", "}_{", "\\mathbf{n}", "}"]).
+rule(class(A1)^t, [[A1^t, A1^f]], class_t).
+tex_rn(class_t, ["{", "\\circ", "}_{", "\\mathbf{t}", "}"]).
+op(500,fx,class).
+tex_op(class(A), ["\\circ", " ", A]).

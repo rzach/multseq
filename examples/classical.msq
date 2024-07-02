@@ -1,0 +1,84 @@
+% classical.msq - MSeq specification of logic 'classical'
+truth_values([f,t]).
+designated_truth_values([t]).
+tex_tv(f,["\\mathbf{f}"]).
+tex_tv(t,["\\mathbf{t}"]).
+
+operator(neg, 1, "\\neg").
+rule(neg(A1)^f, [[A1^t]], neg_f).
+tex_rn(neg_f, ["{", "\\neg", "}_{", "\\mathbf{f}", "}"]).
+rule(neg(A1)^t, [[A1^f]], neg_t).
+tex_rn(neg_t, ["{", "\\neg", "}_{", "\\mathbf{t}", "}"]).
+op(500,fx,neg).
+tex_op(neg(A), ["\\neg", " ", A]).
+
+operator(and, 2, "\\land").
+rule(and(A1 , A2)^f, [[A1^f, A2^f]], and_f).
+tex_rn(and_f, ["{", "\\land", "}_{", "\\mathbf{f}", "}"]).
+rule(and(A1 , A2)^t, [[A2^t], [A1^t]], and_t).
+tex_rn(and_t, ["{", "\\land", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,and).
+tex_op(and(A, B), ["(", A, "\\land", " ", B, ")"]).
+
+operator(or, 2, "\\lor").
+rule(or(A1 , A2)^f, [[A2^f], [A1^f]], or_f).
+tex_rn(or_f, ["{", "\\lor", "}_{", "\\mathbf{f}", "}"]).
+rule(or(A1 , A2)^t, [[A1^t, A2^t]], or_t).
+tex_rn(or_t, ["{", "\\lor", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,or).
+tex_op(or(A, B), ["(", A, "\\lor", " ", B, ")"]).
+
+operator(imp, 2, "\\rightarrow").
+rule(imp(A1 , A2)^f, [[A2^f], [A1^t]], imp_f).
+tex_rn(imp_f, ["{", "\\rightarrow", "}_{", "\\mathbf{f}", "}"]).
+rule(imp(A1 , A2)^t, [[A1^f, A2^t]], imp_t).
+tex_rn(imp_t, ["{", "\\rightarrow", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,imp).
+tex_op(imp(A, B), ["(", A, "\\rightarrow", " ", B, ")"]).
+
+operator(equiv, 2, "\\leftrightarrow").
+rule(equiv(A1 , A2)^f, [[A1^f, A2^f], [A1^t, A2^t]], equiv_f).
+tex_rn(equiv_f, ["{", "\\leftrightarrow", "}_{", "\\mathbf{f}", "}"]).
+rule(equiv(A1 , A2)^t, [[A1^f, A2^t], [A1^t, A2^f]], equiv_t).
+tex_rn(equiv_t, ["{", "\\leftrightarrow", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,equiv).
+tex_op(equiv(A, B), ["(", A, "\\leftrightarrow", " ", B, ")"]).
+
+operator(nand, 2, "\\mid").
+rule(nand(A1 , A2)^f, [[A2^t], [A1^t]], nand_f).
+tex_rn(nand_f, ["{", "\\mid", "}_{", "\\mathbf{f}", "}"]).
+rule(nand(A1 , A2)^t, [[A1^f, A2^f]], nand_t).
+tex_rn(nand_t, ["{", "\\mid", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,nand).
+tex_op(nand(A, B), ["(", A, "\\mid", " ", B, ")"]).
+
+operator(nor, 2, "\\downarrow").
+rule(nor(A1 , A2)^f, [[A1^t, A2^t]], nor_f).
+tex_rn(nor_f, ["{", "\\downarrow", "}_{", "\\mathbf{f}", "}"]).
+rule(nor(A1 , A2)^t, [[A2^f], [A1^f]], nor_t).
+tex_rn(nor_t, ["{", "\\downarrow", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,nor).
+tex_op(nor(A, B), ["(", A, "\\downarrow", " ", B, ")"]).
+
+operator(xor, 2, "\\oplus").
+rule(xor(A1 , A2)^f, [[A1^f, A2^t], [A1^t, A2^f]], xor_f).
+tex_rn(xor_f, ["{", "\\oplus", "}_{", "\\mathbf{f}", "}"]).
+rule(xor(A1 , A2)^t, [[A1^f, A2^f], [A1^t, A2^t]], xor_t).
+tex_rn(xor_t, ["{", "\\oplus", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,xor).
+tex_op(xor(A, B), ["(", A, "\\oplus", " ", B, ")"]).
+
+operator(excl, 2, "\\nrightarrow").
+rule(excl(A1 , A2)^f, [[A1^f, A2^t]], excl_f).
+tex_rn(excl_f, ["{", "\\nrightarrow", "}_{", "\\mathbf{f}", "}"]).
+rule(excl(A1 , A2)^t, [[A2^f], [A1^t]], excl_t).
+tex_rn(excl_t, ["{", "\\nrightarrow", "}_{", "\\mathbf{t}", "}"]).
+op(700,xfx,excl).
+tex_op(excl(A, B), ["(", A, "\\nrightarrow", " ", B, ")"]).
+
+operator(ite, 3, "\\mathit{ite}").
+rule(ite(A1 , A2 , A3)^f, [[A1^f, A2^f], [A1^t, A3^f]], ite_f).
+tex_rn(ite_f, ["{", "\\mathit{ite}", "}_{", "\\mathbf{f}", "}"]).
+rule(ite(A1 , A2 , A3)^t, [[A1^f, A2^t], [A1^t, A3^t]], ite_t).
+tex_rn(ite_t, ["{", "\\mathit{ite}", "}_{", "\\mathbf{t}", "}"]).
+tex_op(ite(A1 , A2 , A3), ["\\mathit{ite}", "(", A1 , ",", A2 , ",", A3, ")"]).

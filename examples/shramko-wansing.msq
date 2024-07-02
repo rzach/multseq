@@ -1,0 +1,235 @@
+% shramko-wansing.msq - MSeq specification of logic 'Shramko-Wansing'
+truth_values([e,n,f,t,b,nf,nt,ft,nb,fb,tb,nft,nfb,ntb,ftb,a]).
+designated_truth_values([t,nt,tb,ntb]).
+tex_tv(e,["\\mathbf{N}"]).
+tex_tv(n,["\\boldsymbol{N}"]).
+tex_tv(f,["\\boldsymbol{F}"]).
+tex_tv(t,["\\boldsymbol{T}"]).
+tex_tv(b,["\\boldsymbol{B}"]).
+tex_tv(nf,["\\mathbf{NF}"]).
+tex_tv(nt,["\\mathbf{NT}"]).
+tex_tv(ft,["\\mathbf{FT}"]).
+tex_tv(nb,["\\mathbf{NB}"]).
+tex_tv(fb,["\\mathbf{FB}"]).
+tex_tv(tb,["\\mathbf{TB}"]).
+tex_tv(nft,["\\mathbf{NFT}"]).
+tex_tv(nfb,["\\mathbf{NFB}"]).
+tex_tv(ntb,["\\mathbf{NTB}"]).
+tex_tv(ftb,["\\mathbf{FTB}"]).
+tex_tv(a,["\\mathbf{A}"]).
+
+operator(negt, 1, "\\lnot_t").
+rule(negt(A1)^a, [[A1^a]], negt_a).
+tex_rn(negt_a, ["{", "\\lnot_t", "}_{", "\\mathbf{A}", "}"]).
+rule(negt(A1)^b, [[A1^f]], negt_b).
+tex_rn(negt_b, ["{", "\\lnot_t", "}_{", "\\boldsymbol{B}", "}"]).
+rule(negt(A1)^e, [[A1^e]], negt_e).
+tex_rn(negt_e, ["{", "\\lnot_t", "}_{", "\\mathbf{N}", "}"]).
+rule(negt(A1)^f, [[A1^b]], negt_f).
+tex_rn(negt_f, ["{", "\\lnot_t", "}_{", "\\boldsymbol{F}", "}"]).
+rule(negt(A1)^fb, [[A1^fb]], negt_fb).
+tex_rn(negt_fb, ["{", "\\lnot_t", "}_{", "\\mathbf{FB}", "}"]).
+rule(negt(A1)^ft, [[A1^nb]], negt_ft).
+tex_rn(negt_ft, ["{", "\\lnot_t", "}_{", "\\mathbf{FT}", "}"]).
+rule(negt(A1)^ftb, [[A1^nfb]], negt_ftb).
+tex_rn(negt_ftb, ["{", "\\lnot_t", "}_{", "\\mathbf{FTB}", "}"]).
+rule(negt(A1)^n, [[A1^t]], negt_n).
+tex_rn(negt_n, ["{", "\\lnot_t", "}_{", "\\boldsymbol{N}", "}"]).
+rule(negt(A1)^nb, [[A1^ft]], negt_nb).
+tex_rn(negt_nb, ["{", "\\lnot_t", "}_{", "\\mathbf{NB}", "}"]).
+rule(negt(A1)^nf, [[A1^tb]], negt_nf).
+tex_rn(negt_nf, ["{", "\\lnot_t", "}_{", "\\mathbf{NF}", "}"]).
+rule(negt(A1)^nfb, [[A1^ftb]], negt_nfb).
+tex_rn(negt_nfb, ["{", "\\lnot_t", "}_{", "\\mathbf{NFB}", "}"]).
+rule(negt(A1)^nft, [[A1^ntb]], negt_nft).
+tex_rn(negt_nft, ["{", "\\lnot_t", "}_{", "\\mathbf{NFT}", "}"]).
+rule(negt(A1)^nt, [[A1^nt]], negt_nt).
+tex_rn(negt_nt, ["{", "\\lnot_t", "}_{", "\\mathbf{NT}", "}"]).
+rule(negt(A1)^ntb, [[A1^nft]], negt_ntb).
+tex_rn(negt_ntb, ["{", "\\lnot_t", "}_{", "\\mathbf{NTB}", "}"]).
+rule(negt(A1)^t, [[A1^n]], negt_t).
+tex_rn(negt_t, ["{", "\\lnot_t", "}_{", "\\boldsymbol{T}", "}"]).
+rule(negt(A1)^tb, [[A1^nf]], negt_tb).
+tex_rn(negt_tb, ["{", "\\lnot_t", "}_{", "\\mathbf{TB}", "}"]).
+op(500,fx,negt).
+tex_op(negt(A), ["\\lnot_t", " ", A]).
+
+operator(negf, 1, "\\lnot_f").
+rule(negf(A1)^a, [[A1^a]], negf_a).
+tex_rn(negf_a, ["{", "\\lnot_f", "}_{", "\\mathbf{A}", "}"]).
+rule(negf(A1)^b, [[A1^t]], negf_b).
+tex_rn(negf_b, ["{", "\\lnot_f", "}_{", "\\boldsymbol{B}", "}"]).
+rule(negf(A1)^e, [[A1^e]], negf_e).
+tex_rn(negf_e, ["{", "\\lnot_f", "}_{", "\\mathbf{N}", "}"]).
+rule(negf(A1)^f, [[A1^n]], negf_f).
+tex_rn(negf_f, ["{", "\\lnot_f", "}_{", "\\boldsymbol{F}", "}"]).
+rule(negf(A1)^fb, [[A1^nt]], negf_fb).
+tex_rn(negf_fb, ["{", "\\lnot_f", "}_{", "\\mathbf{FB}", "}"]).
+rule(negf(A1)^ft, [[A1^nb]], negf_ft).
+tex_rn(negf_ft, ["{", "\\lnot_f", "}_{", "\\mathbf{FT}", "}"]).
+rule(negf(A1)^ftb, [[A1^ntb]], negf_ftb).
+tex_rn(negf_ftb, ["{", "\\lnot_f", "}_{", "\\mathbf{FTB}", "}"]).
+rule(negf(A1)^n, [[A1^f]], negf_n).
+tex_rn(negf_n, ["{", "\\lnot_f", "}_{", "\\boldsymbol{N}", "}"]).
+rule(negf(A1)^nb, [[A1^ft]], negf_nb).
+tex_rn(negf_nb, ["{", "\\lnot_f", "}_{", "\\mathbf{NB}", "}"]).
+rule(negf(A1)^nf, [[A1^nf]], negf_nf).
+tex_rn(negf_nf, ["{", "\\lnot_f", "}_{", "\\mathbf{NF}", "}"]).
+rule(negf(A1)^nfb, [[A1^nft]], negf_nfb).
+tex_rn(negf_nfb, ["{", "\\lnot_f", "}_{", "\\mathbf{NFB}", "}"]).
+rule(negf(A1)^nft, [[A1^nfb]], negf_nft).
+tex_rn(negf_nft, ["{", "\\lnot_f", "}_{", "\\mathbf{NFT}", "}"]).
+rule(negf(A1)^nt, [[A1^fb]], negf_nt).
+tex_rn(negf_nt, ["{", "\\lnot_f", "}_{", "\\mathbf{NT}", "}"]).
+rule(negf(A1)^ntb, [[A1^ftb]], negf_ntb).
+tex_rn(negf_ntb, ["{", "\\lnot_f", "}_{", "\\mathbf{NTB}", "}"]).
+rule(negf(A1)^t, [[A1^b]], negf_t).
+tex_rn(negf_t, ["{", "\\lnot_f", "}_{", "\\boldsymbol{T}", "}"]).
+rule(negf(A1)^tb, [[A1^tb]], negf_tb).
+tex_rn(negf_tb, ["{", "\\lnot_f", "}_{", "\\mathbf{TB}", "}"]).
+op(500,fx,negf).
+tex_op(negf(A), ["\\lnot_f", " ", A]).
+
+operator(andt, 2, "\\land_t").
+rule(andt(A1 , A2)^a, [[A2^tb, A2^ntb, A2^ftb, A2^a], [A1^ntb, A1^a, A2^ntb, A2^a], [A1^ftb, A1^a, A2^ftb, A2^a], [A1^tb, A1^ntb, A1^ftb, A1^a]], andt_a).
+tex_rn(andt_a, ["{", "\\land_t", "}_{", "\\mathbf{A}", "}"]).
+rule(andt(A1 , A2)^b, [[A2^b, A2^tb], [A1^b, A2^b], [A1^b, A1^tb]], andt_b).
+tex_rn(andt_b, ["{", "\\land_t", "}_{", "\\boldsymbol{B}", "}"]).
+rule(andt(A1 , A2)^e, [[A2^e, A2^t, A2^b, A2^tb], [A1^e, A1^t, A2^e, A2^t], [A1^e, A1^b, A2^e, A2^b], [A1^e, A1^t, A1^b, A1^tb]], andt_e).
+tex_rn(andt_e, ["{", "\\land_t", "}_{", "\\mathbf{N}", "}"]).
+rule(andt(A1 , A2)^f, [[A2^e, A2^f, A2^t, A2^b, A2^ft, A2^fb, A2^tb, A2^ftb], [A1^e, A1^f, A1^t, A1^ft, A2^e, A2^f, A2^t, A2^ft], [A1^e, A1^f, A1^b, A1^fb, A2^e, A2^f, A2^b, A2^fb], [A1^f, A1^ft, A1^fb, A1^ftb, A2^f, A2^ft, A2^fb, A2^ftb], [A1^e, A1^f, A1^t, A1^b, A1^ft, A1^fb, A1^tb, A1^ftb]], andt_f).
+tex_rn(andt_f, ["{", "\\land_t", "}_{", "\\boldsymbol{F}", "}"]).
+rule(andt(A1 , A2)^fb, [[A2^b, A2^fb, A2^tb, A2^ftb], [A1^b, A1^fb, A2^b, A2^fb], [A1^fb, A1^ftb, A2^fb, A2^ftb], [A1^b, A1^fb, A1^tb, A1^ftb]], andt_fb).
+tex_rn(andt_fb, ["{", "\\land_t", "}_{", "\\mathbf{FB}", "}"]).
+rule(andt(A1 , A2)^ft, [[A2^t, A2^ft, A2^tb, A2^ftb], [A1^t, A1^ft, A2^t, A2^ft], [A1^ft, A1^ftb, A2^ft, A2^ftb], [A1^t, A1^ft, A1^tb, A1^ftb]], andt_ft).
+tex_rn(andt_ft, ["{", "\\land_t", "}_{", "\\mathbf{FT}", "}"]).
+rule(andt(A1 , A2)^ftb, [[A2^tb, A2^ftb], [A1^ftb, A2^ftb], [A1^tb, A1^ftb]], andt_ftb).
+tex_rn(andt_ftb, ["{", "\\land_t", "}_{", "\\mathbf{FTB}", "}"]).
+rule(andt(A1 , A2)^n, [[A2^e, A2^n, A2^t, A2^b, A2^nt, A2^nb, A2^tb, A2^ntb], [A1^e, A1^n, A1^t, A1^nt, A2^e, A2^n, A2^t, A2^nt], [A1^e, A1^n, A1^b, A1^nb, A2^e, A2^n, A2^b, A2^nb], [A1^n, A1^nt, A1^nb, A1^ntb, A2^n, A2^nt, A2^nb, A2^ntb], [A1^e, A1^n, A1^t, A1^b, A1^nt, A1^nb, A1^tb, A1^ntb]], andt_n).
+tex_rn(andt_n, ["{", "\\land_t", "}_{", "\\boldsymbol{N}", "}"]).
+rule(andt(A1 , A2)^nb, [[A2^b, A2^nb, A2^tb, A2^ntb], [A1^b, A1^nb, A2^b, A2^nb], [A1^nb, A1^ntb, A2^nb, A2^ntb], [A1^b, A1^nb, A1^tb, A1^ntb]], andt_nb).
+tex_rn(andt_nb, ["{", "\\land_t", "}_{", "\\mathbf{NB}", "}"]).
+rule(andt(A1 , A2)^nf, [[A1^e, A1^n, A1^f, A1^t, A1^nf, A1^nt, A1^ft, A1^nft, A2^e, A2^n, A2^f, A2^t, A2^nf, A2^nt, A2^ft, A2^nft], [A1^e, A1^n, A1^f, A1^b, A1^nf, A1^nb, A1^fb, A1^nfb, A2^e, A2^n, A2^f, A2^b, A2^nf, A2^nb, A2^fb, A2^nfb], [A1^n, A1^nf, A1^nt, A1^nb, A1^nft, A1^nfb, A1^ntb, A1^a, A2^n, A2^nf, A2^nt, A2^nb, A2^nft, A2^nfb, A2^ntb, A2^a], [A1^f, A1^nf, A1^ft, A1^fb, A1^nft, A1^nfb, A1^ftb, A1^a, A2^f, A2^nf, A2^ft, A2^fb, A2^nft, A2^nfb, A2^ftb, A2^a]], andt_nf).
+tex_rn(andt_nf, ["{", "\\land_t", "}_{", "\\mathbf{NF}", "}"]).
+rule(andt(A1 , A2)^nfb, [[A2^b, A2^nb, A2^fb, A2^tb, A2^nfb, A2^ntb, A2^ftb, A2^a], [A1^b, A1^nb, A1^fb, A1^nfb, A2^b, A2^nb, A2^fb, A2^nfb], [A1^nb, A1^nfb, A1^ntb, A1^a, A2^nb, A2^nfb, A2^ntb, A2^a], [A1^fb, A1^nfb, A1^ftb, A1^a, A2^fb, A2^nfb, A2^ftb, A2^a], [A1^b, A1^nb, A1^fb, A1^tb, A1^nfb, A1^ntb, A1^ftb, A1^a]], andt_nfb).
+tex_rn(andt_nfb, ["{", "\\land_t", "}_{", "\\mathbf{NFB}", "}"]).
+rule(andt(A1 , A2)^nft, [[A2^t, A2^nt, A2^ft, A2^tb, A2^nft, A2^ntb, A2^ftb, A2^a], [A1^t, A1^nt, A1^ft, A1^nft, A2^t, A2^nt, A2^ft, A2^nft], [A1^nt, A1^nft, A1^ntb, A1^a, A2^nt, A2^nft, A2^ntb, A2^a], [A1^ft, A1^nft, A1^ftb, A1^a, A2^ft, A2^nft, A2^ftb, A2^a], [A1^t, A1^nt, A1^ft, A1^tb, A1^nft, A1^ntb, A1^ftb, A1^a]], andt_nft).
+tex_rn(andt_nft, ["{", "\\land_t", "}_{", "\\mathbf{NFT}", "}"]).
+rule(andt(A1 , A2)^nt, [[A2^t, A2^nt, A2^tb, A2^ntb], [A1^t, A1^nt, A2^t, A2^nt], [A1^nt, A1^ntb, A2^nt, A2^ntb], [A1^t, A1^nt, A1^tb, A1^ntb]], andt_nt).
+tex_rn(andt_nt, ["{", "\\land_t", "}_{", "\\mathbf{NT}", "}"]).
+rule(andt(A1 , A2)^ntb, [[A2^tb, A2^ntb], [A1^ntb, A2^ntb], [A1^tb, A1^ntb]], andt_ntb).
+tex_rn(andt_ntb, ["{", "\\land_t", "}_{", "\\mathbf{NTB}", "}"]).
+rule(andt(A1 , A2)^t, [[A2^t, A2^tb], [A1^t, A2^t], [A1^t, A1^tb]], andt_t).
+tex_rn(andt_t, ["{", "\\land_t", "}_{", "\\boldsymbol{T}", "}"]).
+rule(andt(A1 , A2)^tb, [[A2^tb], [A1^tb]], andt_tb).
+tex_rn(andt_tb, ["{", "\\land_t", "}_{", "\\mathbf{TB}", "}"]).
+op(700,xfx,andt).
+tex_op(andt(A, B), ["(", A, "\\land_t", " ", B, ")"]).
+
+operator(ort, 2, "\\lor_t").
+rule(ort(A1 , A2)^a, [[A2^nf, A2^nft, A2^nfb, A2^a], [A1^nft, A1^a, A2^nft, A2^a], [A1^nfb, A1^a, A2^nfb, A2^a], [A1^nf, A1^nft, A1^nfb, A1^a]], ort_a).
+tex_rn(ort_a, ["{", "\\lor_t", "}_{", "\\mathbf{A}", "}"]).
+rule(ort(A1 , A2)^b, [[A2^e, A2^n, A2^f, A2^b, A2^nf, A2^nb, A2^fb, A2^nfb], [A1^e, A1^n, A1^b, A1^nb, A2^e, A2^n, A2^b, A2^nb], [A1^e, A1^f, A1^b, A1^fb, A2^e, A2^f, A2^b, A2^fb], [A1^b, A1^nb, A1^fb, A1^nfb, A2^b, A2^nb, A2^fb, A2^nfb], [A1^e, A1^n, A1^f, A1^b, A1^nf, A1^nb, A1^fb, A1^nfb]], ort_b).
+tex_rn(ort_b, ["{", "\\lor_t", "}_{", "\\boldsymbol{B}", "}"]).
+rule(ort(A1 , A2)^e, [[A2^e, A2^n, A2^f, A2^nf], [A1^e, A1^n, A2^e, A2^n], [A1^e, A1^f, A2^e, A2^f], [A1^e, A1^n, A1^f, A1^nf]], ort_e).
+tex_rn(ort_e, ["{", "\\lor_t", "}_{", "\\mathbf{N}", "}"]).
+rule(ort(A1 , A2)^f, [[A2^f, A2^nf], [A1^f, A2^f], [A1^f, A1^nf]], ort_f).
+tex_rn(ort_f, ["{", "\\lor_t", "}_{", "\\boldsymbol{F}", "}"]).
+rule(ort(A1 , A2)^fb, [[A2^f, A2^nf, A2^fb, A2^nfb], [A1^f, A1^fb, A2^f, A2^fb], [A1^fb, A1^nfb, A2^fb, A2^nfb], [A1^f, A1^nf, A1^fb, A1^nfb]], ort_fb).
+tex_rn(ort_fb, ["{", "\\lor_t", "}_{", "\\mathbf{FB}", "}"]).
+rule(ort(A1 , A2)^ft, [[A2^f, A2^nf, A2^ft, A2^nft], [A1^f, A1^ft, A2^f, A2^ft], [A1^ft, A1^nft, A2^ft, A2^nft], [A1^f, A1^nf, A1^ft, A1^nft]], ort_ft).
+tex_rn(ort_ft, ["{", "\\lor_t", "}_{", "\\mathbf{FT}", "}"]).
+rule(ort(A1 , A2)^ftb, [[A2^f, A2^nf, A2^ft, A2^fb, A2^nft, A2^nfb, A2^ftb, A2^a], [A1^f, A1^ft, A1^fb, A1^ftb, A2^f, A2^ft, A2^fb, A2^ftb], [A1^ft, A1^nft, A1^ftb, A1^a, A2^ft, A2^nft, A2^ftb, A2^a], [A1^fb, A1^nfb, A1^ftb, A1^a, A2^fb, A2^nfb, A2^ftb, A2^a], [A1^f, A1^nf, A1^ft, A1^fb, A1^nft, A1^nfb, A1^ftb, A1^a]], ort_ftb).
+tex_rn(ort_ftb, ["{", "\\lor_t", "}_{", "\\mathbf{FTB}", "}"]).
+rule(ort(A1 , A2)^n, [[A2^n, A2^nf], [A1^n, A2^n], [A1^n, A1^nf]], ort_n).
+tex_rn(ort_n, ["{", "\\lor_t", "}_{", "\\boldsymbol{N}", "}"]).
+rule(ort(A1 , A2)^nb, [[A2^n, A2^nf, A2^nb, A2^nfb], [A1^n, A1^nb, A2^n, A2^nb], [A1^nb, A1^nfb, A2^nb, A2^nfb], [A1^n, A1^nf, A1^nb, A1^nfb]], ort_nb).
+tex_rn(ort_nb, ["{", "\\lor_t", "}_{", "\\mathbf{NB}", "}"]).
+rule(ort(A1 , A2)^nf, [[A2^nf], [A1^nf]], ort_nf).
+tex_rn(ort_nf, ["{", "\\lor_t", "}_{", "\\mathbf{NF}", "}"]).
+rule(ort(A1 , A2)^nfb, [[A2^nf, A2^nfb], [A1^nfb, A2^nfb], [A1^nf, A1^nfb]], ort_nfb).
+tex_rn(ort_nfb, ["{", "\\lor_t", "}_{", "\\mathbf{NFB}", "}"]).
+rule(ort(A1 , A2)^nft, [[A2^nf, A2^nft], [A1^nft, A2^nft], [A1^nf, A1^nft]], ort_nft).
+tex_rn(ort_nft, ["{", "\\lor_t", "}_{", "\\mathbf{NFT}", "}"]).
+rule(ort(A1 , A2)^nt, [[A2^n, A2^nf, A2^nt, A2^nft], [A1^n, A1^nt, A2^n, A2^nt], [A1^nt, A1^nft, A2^nt, A2^nft], [A1^n, A1^nf, A1^nt, A1^nft]], ort_nt).
+tex_rn(ort_nt, ["{", "\\lor_t", "}_{", "\\mathbf{NT}", "}"]).
+rule(ort(A1 , A2)^ntb, [[A2^n, A2^nf, A2^nt, A2^nb, A2^nft, A2^nfb, A2^ntb, A2^a], [A1^n, A1^nt, A1^nb, A1^ntb, A2^n, A2^nt, A2^nb, A2^ntb], [A1^nt, A1^nft, A1^ntb, A1^a, A2^nt, A2^nft, A2^ntb, A2^a], [A1^nb, A1^nfb, A1^ntb, A1^a, A2^nb, A2^nfb, A2^ntb, A2^a], [A1^n, A1^nf, A1^nt, A1^nb, A1^nft, A1^nfb, A1^ntb, A1^a]], ort_ntb).
+tex_rn(ort_ntb, ["{", "\\lor_t", "}_{", "\\mathbf{NTB}", "}"]).
+rule(ort(A1 , A2)^t, [[A2^e, A2^n, A2^f, A2^t, A2^nf, A2^nt, A2^ft, A2^nft], [A1^e, A1^n, A1^t, A1^nt, A2^e, A2^n, A2^t, A2^nt], [A1^e, A1^f, A1^t, A1^ft, A2^e, A2^f, A2^t, A2^ft], [A1^t, A1^nt, A1^ft, A1^nft, A2^t, A2^nt, A2^ft, A2^nft], [A1^e, A1^n, A1^f, A1^t, A1^nf, A1^nt, A1^ft, A1^nft]], ort_t).
+tex_rn(ort_t, ["{", "\\lor_t", "}_{", "\\boldsymbol{T}", "}"]).
+rule(ort(A1 , A2)^tb, [[A1^e, A1^n, A1^t, A1^b, A1^nt, A1^nb, A1^tb, A1^ntb, A2^e, A2^n, A2^t, A2^b, A2^nt, A2^nb, A2^tb, A2^ntb], [A1^e, A1^f, A1^t, A1^b, A1^ft, A1^fb, A1^tb, A1^ftb, A2^e, A2^f, A2^t, A2^b, A2^ft, A2^fb, A2^tb, A2^ftb], [A1^t, A1^nt, A1^ft, A1^tb, A1^nft, A1^ntb, A1^ftb, A1^a, A2^t, A2^nt, A2^ft, A2^tb, A2^nft, A2^ntb, A2^ftb, A2^a], [A1^b, A1^nb, A1^fb, A1^tb, A1^nfb, A1^ntb, A1^ftb, A1^a, A2^b, A2^nb, A2^fb, A2^tb, A2^nfb, A2^ntb, A2^ftb, A2^a]], ort_tb).
+tex_rn(ort_tb, ["{", "\\lor_t", "}_{", "\\mathbf{TB}", "}"]).
+op(700,xfx,ort).
+tex_op(ort(A, B), ["(", A, "\\lor_t", " ", B, ")"]).
+
+operator(andf, 2, "\\land_f").
+rule(andf(A1 , A2)^a, [[A2^fb, A2^nfb, A2^ftb, A2^a], [A1^nfb, A1^a, A2^nfb, A2^a], [A1^ftb, A1^a, A2^ftb, A2^a], [A1^fb, A1^nfb, A1^ftb, A1^a]], andf_a).
+tex_rn(andf_a, ["{", "\\land_f", "}_{", "\\mathbf{A}", "}"]).
+rule(andf(A1 , A2)^b, [[A2^b, A2^fb], [A1^b, A2^b], [A1^b, A1^fb]], andf_b).
+tex_rn(andf_b, ["{", "\\land_f", "}_{", "\\boldsymbol{B}", "}"]).
+rule(andf(A1 , A2)^e, [[A2^e, A2^f, A2^b, A2^fb], [A1^e, A1^f, A2^e, A2^f], [A1^e, A1^b, A2^e, A2^b], [A1^e, A1^f, A1^b, A1^fb]], andf_e).
+tex_rn(andf_e, ["{", "\\land_f", "}_{", "\\mathbf{N}", "}"]).
+rule(andf(A1 , A2)^f, [[A2^f, A2^fb], [A1^f, A2^f], [A1^f, A1^fb]], andf_f).
+tex_rn(andf_f, ["{", "\\land_f", "}_{", "\\boldsymbol{F}", "}"]).
+rule(andf(A1 , A2)^fb, [[A2^fb], [A1^fb]], andf_fb).
+tex_rn(andf_fb, ["{", "\\land_f", "}_{", "\\mathbf{FB}", "}"]).
+rule(andf(A1 , A2)^ft, [[A2^f, A2^ft, A2^fb, A2^ftb], [A1^f, A1^ft, A2^f, A2^ft], [A1^ft, A1^ftb, A2^ft, A2^ftb], [A1^f, A1^ft, A1^fb, A1^ftb]], andf_ft).
+tex_rn(andf_ft, ["{", "\\land_f", "}_{", "\\mathbf{FT}", "}"]).
+rule(andf(A1 , A2)^ftb, [[A2^fb, A2^ftb], [A1^ftb, A2^ftb], [A1^fb, A1^ftb]], andf_ftb).
+tex_rn(andf_ftb, ["{", "\\land_f", "}_{", "\\mathbf{FTB}", "}"]).
+rule(andf(A1 , A2)^n, [[A2^e, A2^n, A2^f, A2^b, A2^nf, A2^nb, A2^fb, A2^nfb], [A1^e, A1^n, A1^f, A1^nf, A2^e, A2^n, A2^f, A2^nf], [A1^e, A1^n, A1^b, A1^nb, A2^e, A2^n, A2^b, A2^nb], [A1^n, A1^nf, A1^nb, A1^nfb, A2^n, A2^nf, A2^nb, A2^nfb], [A1^e, A1^n, A1^f, A1^b, A1^nf, A1^nb, A1^fb, A1^nfb]], andf_n).
+tex_rn(andf_n, ["{", "\\land_f", "}_{", "\\boldsymbol{N}", "}"]).
+rule(andf(A1 , A2)^nb, [[A2^b, A2^nb, A2^fb, A2^nfb], [A1^b, A1^nb, A2^b, A2^nb], [A1^nb, A1^nfb, A2^nb, A2^nfb], [A1^b, A1^nb, A1^fb, A1^nfb]], andf_nb).
+tex_rn(andf_nb, ["{", "\\land_f", "}_{", "\\mathbf{NB}", "}"]).
+rule(andf(A1 , A2)^nf, [[A2^f, A2^nf, A2^fb, A2^nfb], [A1^f, A1^nf, A2^f, A2^nf], [A1^nf, A1^nfb, A2^nf, A2^nfb], [A1^f, A1^nf, A1^fb, A1^nfb]], andf_nf).
+tex_rn(andf_nf, ["{", "\\land_f", "}_{", "\\mathbf{NF}", "}"]).
+rule(andf(A1 , A2)^nfb, [[A2^fb, A2^nfb], [A1^nfb, A2^nfb], [A1^fb, A1^nfb]], andf_nfb).
+tex_rn(andf_nfb, ["{", "\\land_f", "}_{", "\\mathbf{NFB}", "}"]).
+rule(andf(A1 , A2)^nft, [[A2^f, A2^nf, A2^ft, A2^fb, A2^nft, A2^nfb, A2^ftb, A2^a], [A1^f, A1^nf, A1^ft, A1^nft, A2^f, A2^nf, A2^ft, A2^nft], [A1^nf, A1^nft, A1^nfb, A1^a, A2^nf, A2^nft, A2^nfb, A2^a], [A1^ft, A1^nft, A1^ftb, A1^a, A2^ft, A2^nft, A2^ftb, A2^a], [A1^f, A1^nf, A1^ft, A1^fb, A1^nft, A1^nfb, A1^ftb, A1^a]], andf_nft).
+tex_rn(andf_nft, ["{", "\\land_f", "}_{", "\\mathbf{NFT}", "}"]).
+rule(andf(A1 , A2)^nt, [[A1^e, A1^n, A1^f, A1^t, A1^nf, A1^nt, A1^ft, A1^nft, A2^e, A2^n, A2^f, A2^t, A2^nf, A2^nt, A2^ft, A2^nft], [A1^e, A1^n, A1^t, A1^b, A1^nt, A1^nb, A1^tb, A1^ntb, A2^e, A2^n, A2^t, A2^b, A2^nt, A2^nb, A2^tb, A2^ntb], [A1^n, A1^nf, A1^nt, A1^nb, A1^nft, A1^nfb, A1^ntb, A1^a, A2^n, A2^nf, A2^nt, A2^nb, A2^nft, A2^nfb, A2^ntb, A2^a], [A1^t, A1^nt, A1^ft, A1^tb, A1^nft, A1^ntb, A1^ftb, A1^a, A2^t, A2^nt, A2^ft, A2^tb, A2^nft, A2^ntb, A2^ftb, A2^a]], andf_nt).
+tex_rn(andf_nt, ["{", "\\land_f", "}_{", "\\mathbf{NT}", "}"]).
+rule(andf(A1 , A2)^ntb, [[A2^b, A2^nb, A2^fb, A2^tb, A2^nfb, A2^ntb, A2^ftb, A2^a], [A1^b, A1^nb, A1^tb, A1^ntb, A2^b, A2^nb, A2^tb, A2^ntb], [A1^nb, A1^nfb, A1^ntb, A1^a, A2^nb, A2^nfb, A2^ntb, A2^a], [A1^tb, A1^ntb, A1^ftb, A1^a, A2^tb, A2^ntb, A2^ftb, A2^a], [A1^b, A1^nb, A1^fb, A1^tb, A1^nfb, A1^ntb, A1^ftb, A1^a]], andf_ntb).
+tex_rn(andf_ntb, ["{", "\\land_f", "}_{", "\\mathbf{NTB}", "}"]).
+rule(andf(A1 , A2)^t, [[A2^e, A2^f, A2^t, A2^b, A2^ft, A2^fb, A2^tb, A2^ftb], [A1^e, A1^f, A1^t, A1^ft, A2^e, A2^f, A2^t, A2^ft], [A1^e, A1^t, A1^b, A1^tb, A2^e, A2^t, A2^b, A2^tb], [A1^t, A1^ft, A1^tb, A1^ftb, A2^t, A2^ft, A2^tb, A2^ftb], [A1^e, A1^f, A1^t, A1^b, A1^ft, A1^fb, A1^tb, A1^ftb]], andf_t).
+tex_rn(andf_t, ["{", "\\land_f", "}_{", "\\boldsymbol{T}", "}"]).
+rule(andf(A1 , A2)^tb, [[A2^b, A2^fb, A2^tb, A2^ftb], [A1^b, A1^tb, A2^b, A2^tb], [A1^tb, A1^ftb, A2^tb, A2^ftb], [A1^b, A1^fb, A1^tb, A1^ftb]], andf_tb).
+tex_rn(andf_tb, ["{", "\\land_f", "}_{", "\\mathbf{TB}", "}"]).
+op(700,xfx,andf).
+tex_op(andf(A, B), ["(", A, "\\land_f", " ", B, ")"]).
+
+operator(orf, 2, "\\lor_f").
+rule(orf(A1 , A2)^a, [[A2^nt, A2^nft, A2^ntb, A2^a], [A1^nft, A1^a, A2^nft, A2^a], [A1^ntb, A1^a, A2^ntb, A2^a], [A1^nt, A1^nft, A1^ntb, A1^a]], orf_a).
+tex_rn(orf_a, ["{", "\\lor_f", "}_{", "\\mathbf{A}", "}"]).
+rule(orf(A1 , A2)^b, [[A2^e, A2^n, A2^t, A2^b, A2^nt, A2^nb, A2^tb, A2^ntb], [A1^e, A1^n, A1^b, A1^nb, A2^e, A2^n, A2^b, A2^nb], [A1^e, A1^t, A1^b, A1^tb, A2^e, A2^t, A2^b, A2^tb], [A1^b, A1^nb, A1^tb, A1^ntb, A2^b, A2^nb, A2^tb, A2^ntb], [A1^e, A1^n, A1^t, A1^b, A1^nt, A1^nb, A1^tb, A1^ntb]], orf_b).
+tex_rn(orf_b, ["{", "\\lor_f", "}_{", "\\boldsymbol{B}", "}"]).
+rule(orf(A1 , A2)^e, [[A2^e, A2^n, A2^t, A2^nt], [A1^e, A1^n, A2^e, A2^n], [A1^e, A1^t, A2^e, A2^t], [A1^e, A1^n, A1^t, A1^nt]], orf_e).
+tex_rn(orf_e, ["{", "\\lor_f", "}_{", "\\mathbf{N}", "}"]).
+rule(orf(A1 , A2)^f, [[A2^e, A2^n, A2^f, A2^t, A2^nf, A2^nt, A2^ft, A2^nft], [A1^e, A1^n, A1^f, A1^nf, A2^e, A2^n, A2^f, A2^nf], [A1^e, A1^f, A1^t, A1^ft, A2^e, A2^f, A2^t, A2^ft], [A1^f, A1^nf, A1^ft, A1^nft, A2^f, A2^nf, A2^ft, A2^nft], [A1^e, A1^n, A1^f, A1^t, A1^nf, A1^nt, A1^ft, A1^nft]], orf_f).
+tex_rn(orf_f, ["{", "\\lor_f", "}_{", "\\boldsymbol{F}", "}"]).
+rule(orf(A1 , A2)^fb, [[A1^e, A1^n, A1^f, A1^b, A1^nf, A1^nb, A1^fb, A1^nfb, A2^e, A2^n, A2^f, A2^b, A2^nf, A2^nb, A2^fb, A2^nfb], [A1^e, A1^f, A1^t, A1^b, A1^ft, A1^fb, A1^tb, A1^ftb, A2^e, A2^f, A2^t, A2^b, A2^ft, A2^fb, A2^tb, A2^ftb], [A1^f, A1^nf, A1^ft, A1^fb, A1^nft, A1^nfb, A1^ftb, A1^a, A2^f, A2^nf, A2^ft, A2^fb, A2^nft, A2^nfb, A2^ftb, A2^a], [A1^b, A1^nb, A1^fb, A1^tb, A1^nfb, A1^ntb, A1^ftb, A1^a, A2^b, A2^nb, A2^fb, A2^tb, A2^nfb, A2^ntb, A2^ftb, A2^a]], orf_fb).
+tex_rn(orf_fb, ["{", "\\lor_f", "}_{", "\\mathbf{FB}", "}"]).
+rule(orf(A1 , A2)^ft, [[A2^t, A2^nt, A2^ft, A2^nft], [A1^t, A1^ft, A2^t, A2^ft], [A1^ft, A1^nft, A2^ft, A2^nft], [A1^t, A1^nt, A1^ft, A1^nft]], orf_ft).
+tex_rn(orf_ft, ["{", "\\lor_f", "}_{", "\\mathbf{FT}", "}"]).
+rule(orf(A1 , A2)^ftb, [[A2^t, A2^nt, A2^ft, A2^tb, A2^nft, A2^ntb, A2^ftb, A2^a], [A1^t, A1^ft, A1^tb, A1^ftb, A2^t, A2^ft, A2^tb, A2^ftb], [A1^ft, A1^nft, A1^ftb, A1^a, A2^ft, A2^nft, A2^ftb, A2^a], [A1^tb, A1^ntb, A1^ftb, A1^a, A2^tb, A2^ntb, A2^ftb, A2^a], [A1^t, A1^nt, A1^ft, A1^tb, A1^nft, A1^ntb, A1^ftb, A1^a]], orf_ftb).
+tex_rn(orf_ftb, ["{", "\\lor_f", "}_{", "\\mathbf{FTB}", "}"]).
+rule(orf(A1 , A2)^n, [[A2^n, A2^nt], [A1^n, A2^n], [A1^n, A1^nt]], orf_n).
+tex_rn(orf_n, ["{", "\\lor_f", "}_{", "\\boldsymbol{N}", "}"]).
+rule(orf(A1 , A2)^nb, [[A2^n, A2^nt, A2^nb, A2^ntb], [A1^n, A1^nb, A2^n, A2^nb], [A1^nb, A1^ntb, A2^nb, A2^ntb], [A1^n, A1^nt, A1^nb, A1^ntb]], orf_nb).
+tex_rn(orf_nb, ["{", "\\lor_f", "}_{", "\\mathbf{NB}", "}"]).
+rule(orf(A1 , A2)^nf, [[A2^n, A2^nf, A2^nt, A2^nft], [A1^n, A1^nf, A2^n, A2^nf], [A1^nf, A1^nft, A2^nf, A2^nft], [A1^n, A1^nf, A1^nt, A1^nft]], orf_nf).
+tex_rn(orf_nf, ["{", "\\lor_f", "}_{", "\\mathbf{NF}", "}"]).
+rule(orf(A1 , A2)^nfb, [[A2^n, A2^nf, A2^nt, A2^nb, A2^nft, A2^nfb, A2^ntb, A2^a], [A1^n, A1^nf, A1^nb, A1^nfb, A2^n, A2^nf, A2^nb, A2^nfb], [A1^nf, A1^nft, A1^nfb, A1^a, A2^nf, A2^nft, A2^nfb, A2^a], [A1^nb, A1^nfb, A1^ntb, A1^a, A2^nb, A2^nfb, A2^ntb, A2^a], [A1^n, A1^nf, A1^nt, A1^nb, A1^nft, A1^nfb, A1^ntb, A1^a]], orf_nfb).
+tex_rn(orf_nfb, ["{", "\\lor_f", "}_{", "\\mathbf{NFB}", "}"]).
+rule(orf(A1 , A2)^nft, [[A2^nt, A2^nft], [A1^nft, A2^nft], [A1^nt, A1^nft]], orf_nft).
+tex_rn(orf_nft, ["{", "\\lor_f", "}_{", "\\mathbf{NFT}", "}"]).
+rule(orf(A1 , A2)^nt, [[A2^nt], [A1^nt]], orf_nt).
+tex_rn(orf_nt, ["{", "\\lor_f", "}_{", "\\mathbf{NT}", "}"]).
+rule(orf(A1 , A2)^ntb, [[A2^nt, A2^ntb], [A1^ntb, A2^ntb], [A1^nt, A1^ntb]], orf_ntb).
+tex_rn(orf_ntb, ["{", "\\lor_f", "}_{", "\\mathbf{NTB}", "}"]).
+rule(orf(A1 , A2)^t, [[A2^t, A2^nt], [A1^t, A2^t], [A1^t, A1^nt]], orf_t).
+tex_rn(orf_t, ["{", "\\lor_f", "}_{", "\\boldsymbol{T}", "}"]).
+rule(orf(A1 , A2)^tb, [[A2^t, A2^nt, A2^tb, A2^ntb], [A1^t, A1^tb, A2^t, A2^tb], [A1^tb, A1^ntb, A2^tb, A2^ntb], [A1^t, A1^nt, A1^tb, A1^ntb]], orf_tb).
+tex_rn(orf_tb, ["{", "\\lor_f", "}_{", "\\mathbf{TB}", "}"]).
+op(700,xfx,orf).
+tex_op(orf(A, B), ["(", A, "\\lor_f", " ", B, ")"]).
